@@ -18,8 +18,10 @@ import {
   useMediaQuery,
   useTheme,
   Avatar,
+  Tooltip,
 } from '@mui/material';
 import { useAuth } from '@/context/AuthContext';
+import { useThemeContext } from '@/theme/ThemeProvider';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
@@ -29,6 +31,8 @@ import {
   Menu,
   GraduationCap,
   X,
+  Moon,
+  Sun,
 } from 'lucide-react';
 
 const navItems = [
@@ -42,6 +46,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { mode, toggleTheme } = useThemeContext();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleSignOut = async () => {
@@ -124,6 +129,18 @@ export default function Navbar() {
             )}
 
             <Stack direction="row" spacing={1.5} alignItems="center">
+              <Stack direction="row" spacing={0.5} alignItems="center">
+                <Tooltip title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}>
+                  <IconButton
+                    onClick={toggleTheme}
+                    size="small"
+                    sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                  >
+                    {mode === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+
               <Avatar
                 sx={{
                   width: 34,
@@ -160,8 +177,8 @@ export default function Navbar() {
         PaperProps={{
           sx: {
             width: 280,
-            background: '#111827',
-            borderRight: '1px solid rgba(148,163,184,0.08)',
+            background: mode === 'dark' ? '#111827' : '#FFFFFF',
+            borderRight: mode === 'dark' ? '1px solid rgba(148,163,184,0.08)' : '1px solid rgba(15, 23, 42, 0.06)',
           },
         }}
       >

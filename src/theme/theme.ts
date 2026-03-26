@@ -1,10 +1,8 @@
-'use client';
+import { ThemeOptions } from '@mui/material/styles';
 
-import { createTheme } from '@mui/material/styles';
-
-const theme = createTheme({
+export const getThemeConfig = (mode: 'light' | 'dark'): ThemeOptions => ({
   palette: {
-    mode: 'dark',
+    mode,
     primary: {
       main: '#7C4DFF',
       light: '#B47CFF',
@@ -16,8 +14,8 @@ const theme = createTheme({
       dark: '#00B2CC',
     },
     background: {
-      default: '#0A0E1A',
-      paper: '#111827',
+      default: mode === 'dark' ? '#0A0E1A' : '#F8FAFC',
+      paper: mode === 'dark' ? '#111827' : '#FFFFFF',
     },
     success: {
       main: '#22C55E',
@@ -32,10 +30,10 @@ const theme = createTheme({
       light: '#F87171',
     },
     text: {
-      primary: '#F1F5F9',
-      secondary: '#94A3B8',
+      primary: mode === 'dark' ? '#F1F5F9' : '#0F172A',
+      secondary: mode === 'dark' ? '#94A3B8' : '#64748B',
     },
-    divider: 'rgba(148, 163, 184, 0.12)',
+    divider: mode === 'dark' ? 'rgba(148, 163, 184, 0.12)' : 'rgba(15, 23, 42, 0.08)',
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -52,12 +50,6 @@ const theme = createTheme({
     },
     h6: {
       fontWeight: 600,
-    },
-    subtitle1: {
-      color: '#94A3B8',
-    },
-    body2: {
-      color: '#CBD5E1',
     },
   },
   shape: {
@@ -86,11 +78,11 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          background: 'rgba(17, 24, 39, 0.7)',
+          background: mode === 'dark' ? 'rgba(17, 24, 39, 0.7)' : 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(148, 163, 184, 0.08)',
+          border: mode === 'dark' ? '1px solid rgba(148, 163, 184, 0.08)' : '1px solid rgba(15, 23, 42, 0.05)',
           borderRadius: 20,
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)',
+          boxShadow: mode === 'dark' ? '0 4px 30px rgba(0, 0, 0, 0.2)' : '0 4px 20px rgba(15, 23, 42, 0.03)',
         },
       },
     },
@@ -112,10 +104,10 @@ const theme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          background: '#111827',
-          border: '1px solid rgba(148, 163, 184, 0.1)',
+          background: mode === 'dark' ? '#111827' : '#FFFFFF',
+          border: mode === 'dark' ? '1px solid rgba(148, 163, 184, 0.1)' : '1px solid rgba(15, 23, 42, 0.08)',
           borderRadius: 20,
-          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+          boxShadow: mode === 'dark' ? '0 25px 50px rgba(0, 0, 0, 0.5)' : '0 25px 50px rgba(15, 23, 42, 0.1)',
         },
       },
     },
@@ -124,8 +116,9 @@ const theme = createTheme({
         root: {
           '& .MuiOutlinedInput-root': {
             borderRadius: 12,
+            backgroundColor: mode === 'dark' ? 'transparent' : 'rgba(15, 23, 42, 0.02)',
             '& fieldset': {
-              borderColor: 'rgba(148, 163, 184, 0.15)',
+              borderColor: mode === 'dark' ? 'rgba(148, 163, 184, 0.15)' : 'rgba(15, 23, 42, 0.12)',
             },
             '&:hover fieldset': {
               borderColor: 'rgba(124, 77, 255, 0.4)',
@@ -134,31 +127,15 @@ const theme = createTheme({
         },
       },
     },
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          borderRadius: 12,
-        },
-      },
-    },
-    MuiAlert: {
-      styleOverrides: {
-        root: {
-          borderRadius: 16,
-          fontWeight: 500,
-        },
-      },
-    },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          background: 'rgba(10, 14, 26, 0.8)',
+          background: mode === 'dark' ? 'rgba(10, 14, 26, 0.8)' : 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(20px)',
-          boxShadow: '0 1px 0 rgba(148, 163, 184, 0.08)',
+          boxShadow: mode === 'dark' ? '0 1px 0 rgba(148, 163, 184, 0.08)' : '0 1px 0 rgba(15, 23, 42, 0.06)',
+          color: mode === 'dark' ? '#F1F5F9' : '#0F172A',
         },
       },
     },
   },
 });
-
-export default theme;
