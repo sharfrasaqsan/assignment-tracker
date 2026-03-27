@@ -38,16 +38,16 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   const theme = useMemo(() => createTheme(getThemeConfig(mode)), [mode]);
 
-  if (!mounted) {
-    return <div style={{ visibility: 'hidden' }}>{children}</div>;
-  }
-
   return (
     <ThemeContext.Provider value={{ mode, toggleTheme }}>
-      <MUIThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </MUIThemeProvider>
+      {!mounted ? (
+        <div style={{ visibility: 'hidden' }}>{children}</div>
+      ) : (
+        <MUIThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </MUIThemeProvider>
+      )}
     </ThemeContext.Provider>
   );
 }
